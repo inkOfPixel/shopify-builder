@@ -6,7 +6,7 @@ const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const fs = require("fs");
 
-const PROJECT_ROOT = path.resolve(__dirname, "../..");
+const PROJECT_ROOT = process.cwd();
 const SCRIPTS_ROOT = path.resolve(PROJECT_ROOT, "src/scripts");
 const PACKAGES_ROOT = path.resolve(SCRIPTS_ROOT, "packages");
 const BUILER_ROOT = path.resolve(__dirname, "..");
