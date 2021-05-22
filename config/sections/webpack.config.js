@@ -11,6 +11,9 @@ const SRC_ROOT = path.resolve(PROJECT_ROOT, "src");
 const NODE_MODULES = path.resolve(PROJECT_ROOT, "node_modules");
 
 function getSections() {
+  if (!fs.existsSync(path.resolve(PROJECT_ROOT, "src/sections"))) {
+    return {};
+  }
   const sections = fs
     .readdirSync(path.resolve(PROJECT_ROOT, "src/sections"))
     .filter((name) => name !== ".DS_Store");
