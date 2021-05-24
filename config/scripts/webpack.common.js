@@ -12,9 +12,9 @@ const PACKAGES_ROOT = path.resolve(SCRIPTS_ROOT, "packages");
 const BUILER_ROOT = path.resolve(__dirname, "../..");
 const RUNNER_NODE_MODULES = path.resolve(RUNNER_PROJECT_ROOT, "node_modules");
 
-function getPackages() {
-  console.log("fs.existsSync(PACKAGES_ROOT)", fs.existsSync(PACKAGES_ROOT));
+console.log("RUNNER_NODE_MODULES", RUNNER_NODE_MODULES);
 
+function getPackages() {
   if (!fs.existsSync(PACKAGES_ROOT)) {
     return {};
   }
@@ -43,7 +43,7 @@ function getPackages() {
 module.exports = {
   entry: getPackages(),
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].iop.js",
     path: `${RUNNER_PROJECT_ROOT}/assets`,
   },
   module: {
@@ -89,20 +89,20 @@ module.exports = {
   resolveLoader: {
     modules: [RUNNER_NODE_MODULES],
   },
-  optimization: {
-    runtimeChunk: {
-      name: "vendor",
-    },
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendor",
-          chunks: "all",
-        },
-      },
-    },
-  },
+  // optimization: {
+  //   runtimeChunk: {
+  //     name: "vendor",
+  //   },
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       commons: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         name: "vendor",
+  //         chunks: "all",
+  //       },
+  //     },
+  //   },
+  // },
   plugins: [
     new BundleAnalyzerPlugin({
       analyzerMode: "disabled",
