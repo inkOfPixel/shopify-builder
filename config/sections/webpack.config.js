@@ -4,25 +4,27 @@ const path = require("path");
 const fs = require("fs");
 const LiquidPlugin = require("./plugins/LiquidPlugin");
 const AfterEmitPlugin = require("./plugins/AfterEmitPlugin");
+const webpack = require("webpack");
 
-const PROJECT_ROOT = path.resolve(process.cwd());
+const RUNNER_PROJECT_ROOT = process.cwd();
+const SECTIONS_ROOT = path.resolve(RUNNER_PROJECT_ROOT, "src/sections");
 const BUILER_ROOT = path.resolve(__dirname, "..");
-const SRC_ROOT = path.resolve(PROJECT_ROOT, "src");
-const NODE_MODULES = path.resolve(PROJECT_ROOT, "node_modules");
+const SRC_ROOT = path.resolve(RUNNER_PROJECT_ROOT, "src");
+const RUNNER_NODE_MODULES = path.resolve(RUNNER_PROJECT_ROOT, "node_modules");
 
 function getSections() {
-  if (!fs.existsSync(path.resolve(PROJECT_ROOT, "src/sections"))) {
+  if (!fs.existsSync(path.resolve(RUNNER_PROJECT_ROOT, "src/sections"))) {
     return {};
   }
   const sections = fs
-    .readdirSync(path.resolve(PROJECT_ROOT, "src/sections"))
+    .readdirSync(path.resolve(RUNNER_PROJECT_ROOT, "src/sections"))
     .filter((name) => name !== ".DS_Store");
 
   return sections.reduce(
     (entries, section) => ({
       ...entries,
       [section]: path.resolve(
-        PROJECT_ROOT,
+        RUNNER_PROJECT_ROOT,
         `src/sections/${section}/index.liquid`
       ),
     }),
@@ -30,30 +32,35 @@ function getSections() {
   );
 }
 
+const providePlugin = new webpack.ProvidePlugin({
+  $: "jquery",
+  jQuery: "jquery",
+});
+
 const config = {
   entry: getSections(),
   output: {
-    path: path.resolve(PROJECT_ROOT, "sections"),
-    filename: "[name].js",
+    path: path.resolve(RUNNER_PROJECT_ROOT, "sections"),
+    filename: "[name].iop.js",
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        exclude: [NODE_MODULES, /node_modules/],
+        exclude: [RUNNER_NODE_MODULES, /node_modules/],
         use: [
           "babel-loader",
           {
             loader: "ts-loader",
             options: {
-              configFile: `${BUILER_ROOT}/builder.tsconfig.json`,
+              configFile: `${RUNNER_PROJECT_ROOT}/tsconfig.json`,
             },
           },
         ],
       },
       {
         test: /\.js$/,
-        exclude: [NODE_MODULES, /node_modules/],
+        exclude: [RUNNER_NODE_MODULES, /node_modules/],
         use: ["babel-loader"],
       },
       {
@@ -68,10 +75,10 @@ const config = {
             },
           },
           {
-            loader: require.resolve("postcss-loader"),
+            loader: "postcss-loader",
             options: {
               postcssOptions: {
-                config: path.resolve(BUILER_ROOT, "postcss.config.js"),
+                plugins: [["autoprefixer"]],
               },
             },
           },
@@ -91,7 +98,7 @@ const config = {
       },
       {
         test: /\.json$/,
-        exclude: [NODE_MODULES, /node_modules/],
+        exclude: [RUNNER_NODE_MODULES, /node_modules/],
         use: ["raw-loader", { loader: "extract-loader" }],
       },
       {
@@ -100,10 +107,10 @@ const config = {
       },
     ],
   },
-  plugins: [new LiquidPlugin(), new AfterEmitPlugin()],
+  plugins: [new LiquidPlugin(), new AfterEmitPlugin(), providePlugin],
   resolve: {
-    modules: [path.join(PROJECT_ROOT, "node_modules")],
-    extensions: [".ts", ".js", ".jsx", ".liquid", ".scss"],
+    modules: [path.join(RUNNER_PROJECT_ROOT, "node_modules")],
+    extensions: [".ts", ".js", ".liquid", ".scss"],
     alias: {
       lib: path.resolve(SRC_ROOT, "lib"),
     },

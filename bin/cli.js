@@ -18,7 +18,8 @@ async function run() {
 
   // buildSections();
   // buildScripts();
-  watchScripts();
+  watchSections();
+  // watchScripts();
 }
 
 run();
@@ -74,35 +75,64 @@ function watchScripts() {
   ].join(" ");
   console.log("script", script);
 
-  let child = spawn(script, {
+  let childProcess = spawn(script, {
     stdio: "inherit",
     shell: true,
   });
 
-  child.stdout?.on("data", function (data) {
+  childProcess.stdout?.on("data", function (data) {
     console.log(data.toString());
   });
 
-  child.on("exit", (code, signal) => {
+  childProcess.stderr?.on("data", function (data) {
+    console.log(data.toString());
+  });
+
+  childProcess.on("exit", (code, signal) => {
     if (code === null) {
       code = signal === "SIGINT" ? 130 : 1;
     }
 
     process.exitCode = code;
   });
-  // const compiler = webpack(scriptsWebpackConfigDev);
-  // new webpack.ProgressPlugin().apply(compiler);
+}
 
-  // const watching = compiler.watch({}, (error, stats) => {
-  //   if (error) {
-  //     console.log(error);
-  //     throw error;
-  //   }
-  // });
+function watchSections() {
+  console.log("watch sections");
+  const sectionsWebpackConfigPath = path.resolve(
+    ROOT,
+    "config/sections/webpack.config.js"
+  );
 
-  // watching.close((closeErr) => {
-  //   console.log("\nWatching Ended.");
-  // });
+  const script = [
+    `cross-env NODE_ENV=development ${path.resolve(
+      process.cwd(),
+      "node_modules/.bin/webpack"
+    )} --progress --watch`,
+    `--config="${sectionsWebpackConfigPath}"`,
+  ].join(" ");
+  console.log("script", script);
+
+  let childProcess = spawn(script, {
+    stdio: "inherit",
+    shell: true,
+  });
+
+  childProcess.stdout?.on("data", function (data) {
+    console.log(data.toString());
+  });
+
+  childProcess.stderr?.on("data", function (data) {
+    console.log(data.toString());
+  });
+
+  childProcess.on("exit", (code, signal) => {
+    if (code === null) {
+      code = signal === "SIGINT" ? 130 : 1;
+    }
+
+    process.exitCode = code;
+  });
 }
 
 // function watchSections(watch) {

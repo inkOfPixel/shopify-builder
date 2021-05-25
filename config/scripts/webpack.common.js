@@ -49,7 +49,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx?)$/,
+        test: /\.jsx?$/,
         exclude: [RUNNER_NODE_MODULES, /node_modules/],
         use: {
           loader: "babel-loader",
@@ -59,7 +59,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(ts|tsx?)$/,
+        test: /\.tsx?$/,
         exclude: [RUNNER_NODE_MODULES, /node_modules/],
         use: [
           "babel-loader",
@@ -73,7 +73,20 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
+        use: [
+          "style-loader",
+          "css-loader",
+
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                config: path.resolve(BUILER_ROOT, "postcss.config.js"),
+              },
+            },
+          },
+          "sass-loader",
+        ],
       },
       {
         test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
