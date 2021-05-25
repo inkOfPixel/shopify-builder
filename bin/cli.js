@@ -19,7 +19,7 @@ async function run() {
   // buildSections();
   // buildScripts();
   watchSections();
-  // watchScripts();
+  watchScripts();
 }
 
 run();

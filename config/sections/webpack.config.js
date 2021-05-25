@@ -32,10 +32,10 @@ function getSections() {
   );
 }
 
-const providePlugin = new webpack.ProvidePlugin({
-  $: "jquery",
-  jQuery: "jquery",
-});
+// const providePlugin = new webpack.ProvidePlugin({
+//   $: "jquery",
+//   jQuery: "jquery",
+// });
 
 const config = {
   entry: getSections(),
@@ -107,7 +107,7 @@ const config = {
       },
     ],
   },
-  plugins: [new LiquidPlugin(), new AfterEmitPlugin(), providePlugin],
+  plugins: [new LiquidPlugin(), new AfterEmitPlugin()],
   resolve: {
     modules: [path.join(RUNNER_PROJECT_ROOT, "node_modules")],
     extensions: [".ts", ".js", ".liquid", ".scss"],
