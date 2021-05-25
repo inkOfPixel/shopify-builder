@@ -46,6 +46,16 @@ module.exports = {
     filename: "[name].iop.js",
     path: `${RUNNER_PROJECT_ROOT}/assets`,
   },
+  watchOptions: {
+    aggregateTimeout: 2000,
+    ignored: [
+      path.posix.resolve(RUNNER_PROJECT_ROOT, "node_modules"),
+      path.posix.resolve(RUNNER_PROJECT_ROOT, "assets"),
+      path.posix.resolve(RUNNER_PROJECT_ROOT, "sections"),
+      path.posix.resolve(RUNNER_PROJECT_ROOT, "snippet"),
+      path.posix.resolve(RUNNER_PROJECT_ROOT, "templates"),
+    ],
+  },
   module: {
     rules: [
       {
@@ -102,20 +112,20 @@ module.exports = {
   resolveLoader: {
     modules: [RUNNER_NODE_MODULES],
   },
-  // optimization: {
-  //   runtimeChunk: {
-  //     name: "vendor",
-  //   },
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       commons: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         name: "vendor",
-  //         chunks: "all",
-  //       },
-  //     },
-  //   },
-  // },
+  optimization: {
+    runtimeChunk: {
+      name: "vendor",
+    },
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor",
+          chunks: "all",
+        },
+      },
+    },
+  },
   plugins: [
     new BundleAnalyzerPlugin({
       analyzerMode: "disabled",

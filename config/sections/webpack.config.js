@@ -32,16 +32,21 @@ function getSections() {
   );
 }
 
-// const providePlugin = new webpack.ProvidePlugin({
-//   $: "jquery",
-//   jQuery: "jquery",
-// });
-
 const config = {
   entry: getSections(),
   output: {
     path: path.resolve(RUNNER_PROJECT_ROOT, "sections"),
     filename: "[name].iop.js",
+  },
+  watchOptions: {
+    aggregateTimeout: 2000,
+    ignored: [
+      path.posix.resolve(RUNNER_PROJECT_ROOT, "node_modules"),
+      path.posix.resolve(RUNNER_PROJECT_ROOT, "assets"),
+      path.posix.resolve(RUNNER_PROJECT_ROOT, "sections"),
+      path.posix.resolve(RUNNER_PROJECT_ROOT, "snippet"),
+      path.posix.resolve(RUNNER_PROJECT_ROOT, "templates"),
+    ],
   },
   module: {
     rules: [
