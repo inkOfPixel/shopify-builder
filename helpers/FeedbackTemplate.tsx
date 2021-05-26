@@ -9,16 +9,16 @@ interface TemplateProps {
 function Template({ output, error }: TemplateProps) {
 	return (
 		<Box flexDirection="column" padding={1}>
-			{output && (
+			{output ? (
 				<Box marginTop={1}>
 					<Text color="green">{output}</Text>
 				</Box>
-			)}
-			{error && (
+			) : null}
+			{error ? (
 				<Box marginTop={1}>
 					<Text color="red">{error}</Text>
 				</Box>
-			)}
+			) : null}
 		</Box>
 	);
 }

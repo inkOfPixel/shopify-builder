@@ -11,7 +11,6 @@ class AfterEmitPlugin {
 					compilation.assets,
 					(asset) => asset.emitted
 				);
-				console.log("emittedAssets", emittedAssets);
 				emittedAssets.forEach((asset) => {
 					fs.writeFile(
 						asset.existsAt,

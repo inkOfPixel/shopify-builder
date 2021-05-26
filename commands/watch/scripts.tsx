@@ -1,6 +1,9 @@
+import { Box, Text } from "ink";
 import React from "react";
 import FeedbackTemplate from "../../helpers/FeedbackTemplate";
 import useCommand from "../../helpers/useCommand";
+const { spawn } = require("child_process");
+
 const path = require("path");
 
 function WatchScripts() {
@@ -17,6 +20,8 @@ function WatchScripts() {
 	].join(" ");
 
 	const { output, error } = useCommand(command);
+	console.log("output", output);
+	console.log("error", error);
 	return <FeedbackTemplate output={output} error={error} />;
 }
 

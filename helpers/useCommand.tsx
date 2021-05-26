@@ -6,15 +6,14 @@ function useCommand(command: string) {
 	const [error, setError] = React.useState("");
 
 	React.useEffect(() => {
-		let childProcess = spawn(command, {
-			stdio: "inherit",
-			shell: true,
-		});
+		console.log("USE EFFECT");
+		let childProcess = spawn(command, { stdio: "inherit", shell: true });
+
 		childProcess.stdout?.on("data", function (data) {
-			setOutput(data.toString());
+			console.log("data", data.toString());
 		});
 		childProcess.stderr?.on("data", function (data) {
-			setError(data.toString());
+			// setError(data.toString());
 		});
 	}, []);
 

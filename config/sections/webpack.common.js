@@ -45,6 +45,7 @@ const config = {
 			path.posix.resolve(RUNNER_PROJECT_ROOT, "templates"),
 		],
 	},
+	mode: "production",
 	module: {
 		rules: [
 			{

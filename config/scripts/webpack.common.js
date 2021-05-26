@@ -47,7 +47,6 @@ module.exports = {
 		path: `${RUNNER_PROJECT_ROOT}/assets`,
 	},
 	watchOptions: {
-		aggregateTimeout: 3000,
 		ignored: [
 			path.posix.resolve(RUNNER_PROJECT_ROOT, "node_modules"),
 			path.posix.resolve(RUNNER_PROJECT_ROOT, "assets"),
