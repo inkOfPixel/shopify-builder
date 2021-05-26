@@ -34,7 +34,7 @@ const config = {
 	entry: getSections(),
 	output: {
 		path: path.resolve(RUNNER_PROJECT_ROOT, "sections"),
-		filename: "[name].iop.js",
+		filename: "[name].js",
 	},
 	watchOptions: {
 		ignored: [
