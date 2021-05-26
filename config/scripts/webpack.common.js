@@ -4,6 +4,7 @@ const path = require("path");
 const BundleAnalyzerPlugin =
 	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const fs = require("fs");
+const WebpackBuildNotifierPlugin = require("webpack-build-notifier");
 
 const RUNNER_PROJECT_ROOT = process.cwd();
 const SCRIPTS_ROOT = path.resolve(RUNNER_PROJECT_ROOT, "src/scripts");
@@ -46,7 +47,7 @@ module.exports = {
 		path: `${RUNNER_PROJECT_ROOT}/assets`,
 	},
 	watchOptions: {
-		aggregateTimeout: 2000,
+		aggregateTimeout: 3000,
 		ignored: [
 			path.posix.resolve(RUNNER_PROJECT_ROOT, "node_modules"),
 			path.posix.resolve(RUNNER_PROJECT_ROOT, "assets"),
@@ -99,27 +100,31 @@ module.exports = {
 	},
 	resolveLoader: {
 		modules: [RUNNER_NODE_MODULES],
-		// modules: [path.resolve(BUILER_ROOT, "node_modules")],
 	},
-
-	// optimization: {
-	//   runtimeChunk: {
-	//     name: "vendor",
-	//   },
-	//   splitChunks: {
-	//     cacheGroups: {
-	//       commons: {
-	//         test: /[\\/]node_modules[\\/]/,
-	//         name: "vendor",
-	//         chunks: "all",
-	//       },
-	//     },
-	//   },
-	// },
+	optimization: {
+		runtimeChunk: {
+			name: "runtime",
+		},
+		splitChunks: {
+			cacheGroups: {
+				commons: {
+					test: /[\\/]node_modules[\\/]/,
+					name: "vendor",
+					chunks: "all",
+				},
+			},
+		},
+	},
 	plugins: [
 		new BundleAnalyzerPlugin({
 			analyzerMode: "disabled",
 			generateStatsFile: true,
+		}),
+		new WebpackBuildNotifierPlugin({
+			title: "Scripts built",
+			logo: path.resolve("./img/favicon.png"),
+			suppressSuccess: false,
+			showDuration: true,
 		}),
 	],
 };
