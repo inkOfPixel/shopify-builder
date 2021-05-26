@@ -1,10 +1,20 @@
 import React from "react";
-import Template from "../../helpers/template";
+import FeedbackTemplate from "../../helpers/FeedbackTemplate";
 import useCommand from "../../helpers/useCommand";
+const path = require("path");
 
 function BuildScripts() {
-	const { output, error } = useCommand({ env: "prod", scope: "script" });
-	return <Template output={output} error={error} />;
+	const webpackConfigPath = path.resolve(
+		process.cwd(),
+		`node_modules/shopify-builder/config/scripts/webpack.prod.js`
+	);
+	const command = [
+		`cross-env NODE_ENV=production`,
+		` ${path.resolve(process.cwd(), "node_modules/.bin/webpack")}`,
+		`--config="${webpackConfigPath}"`,
+	].join(" ");
+	const { output, error } = useCommand(command);
+	return <FeedbackTemplate output={output} error={error} />;
 }
 
 export default BuildScripts;

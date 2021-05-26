@@ -1,14 +1,23 @@
 import React from "react";
-import Template from "../../helpers/template";
+import FeedbackTemplate from "../../helpers/FeedbackTemplate";
 import useCommand from "../../helpers/useCommand";
+const path = require("path");
 
 function WatchSections() {
-	const { output, error } = useCommand({
-		env: "dev",
-		scope: "script",
-		watch: true,
-	});
-	return <Template output={output} error={error} />;
+	const webpackConfigPath = path.resolve(
+		process.cwd(),
+		`node_modules/shopify-builder/config/sections/webpack.dev.js`
+	);
+	const command = [
+		`cross-env NODE_ENV=production`,
+		` ${path.resolve(process.cwd(), "node_modules/.bin/webpack")}`,
+		`--progress --watch`,
+		`--config="${webpackConfigPath}"`,
+	].join(" ");
+
+	const { output, error } = useCommand(command);
+
+	return <FeedbackTemplate output={output} error={error} />;
 }
 
 export default WatchSections;

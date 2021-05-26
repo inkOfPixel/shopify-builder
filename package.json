@@ -1,6 +1,6 @@
 {
-	"name": "shopify-builder-pastel",
-	"version": "0.0.1",
+	"name": "shopify-builder",
+	"version": "0.0.2",
 	"license": "MIT",
 	"bin": "./build/cli.js",
 	"engines": {
