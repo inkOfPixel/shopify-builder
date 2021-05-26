@@ -1,12 +1,13 @@
 import { Box } from "ink";
 import React from "react";
+import BuildScripts from "./scripts";
 
-function Build() {
+function Watch() {
 	return (
-		<Box flexDirection="column" padding={1}>
-			Build what?
+		<Box flexDirection="column">
+			<BuildScripts />
 		</Box>
 	);
 }
 
-export default Build;
+export default Watch;

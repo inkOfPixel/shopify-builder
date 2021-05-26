@@ -117,8 +117,6 @@ module.exports = function loader(content) {
 	const loadStyleModule = (module) =>
 		new Promise((resolve, reject) => {
 			this.loadModule(module.resolvedRequest, (error, source) => {
-				console.log("source", source);
-
 				if (error) {
 					reject(error);
 				} else {

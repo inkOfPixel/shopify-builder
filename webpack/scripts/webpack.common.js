@@ -9,10 +9,7 @@ const WebpackBuildNotifierPlugin = require("webpack-build-notifier");
 const RUNNER_PROJECT_ROOT = process.cwd();
 const SCRIPTS_ROOT = path.resolve(RUNNER_PROJECT_ROOT, "src/scripts");
 const PACKAGES_ROOT = path.resolve(SCRIPTS_ROOT, "packages");
-const BUILER_ROOT = path.resolve(__dirname, "../..");
 const RUNNER_NODE_MODULES = path.resolve(RUNNER_PROJECT_ROOT, "node_modules");
-
-console.log("RUNNER_NODE_MODULES", RUNNER_NODE_MODULES);
 
 function getPackages() {
 	if (!fs.existsSync(PACKAGES_ROOT)) {
@@ -92,7 +89,6 @@ module.exports = {
 	},
 	resolve: {
 		extensions: [".js", ".jsx", ".mjs", ".ts", ".tsx", ".json"],
-		roots: [path.resolve(BUILER_ROOT, "node_modules")],
 		alias: {
 			lib: path.resolve(SCRIPTS_ROOT, "./lib"),
 		},
@@ -120,7 +116,7 @@ module.exports = {
 			generateStatsFile: true,
 		}),
 		new WebpackBuildNotifierPlugin({
-			title: "Scripts built",
+			title: "Scripts compilation",
 			logo: path.resolve("./img/favicon.png"),
 			suppressSuccess: false,
 			showDuration: true,

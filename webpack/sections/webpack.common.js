@@ -5,10 +5,13 @@ const fs = require("fs");
 const LiquidPlugin = require("./plugins/LiquidPlugin");
 const AfterEmitPlugin = require("./plugins/AfterEmitPlugin");
 const WebpackBuildNotifierPlugin = require("webpack-build-notifier");
-
 const RUNNER_PROJECT_ROOT = process.cwd();
 const SRC_ROOT = path.resolve(RUNNER_PROJECT_ROOT, "src");
 const RUNNER_NODE_MODULES = path.resolve(RUNNER_PROJECT_ROOT, "node_modules");
+const LOADERS_PATH = path.resolve(
+	process.cwd(),
+	"node_modules/shopify-builder/webpack/sections/loaders"
+);
 
 function getSections() {
 	if (!fs.existsSync(path.resolve(RUNNER_PROJECT_ROOT, "src/sections"))) {
@@ -111,10 +114,11 @@ const config = {
 		],
 	},
 	plugins: [
+		// new webpack.ProgressPlugin(),
 		new LiquidPlugin(),
 		new AfterEmitPlugin(),
 		new WebpackBuildNotifierPlugin({
-			title: "My Webpack Project",
+			title: "Section compilation",
 			logo: path.resolve("./img/favicon.png"),
 			suppressSuccess: true, // don't spam success notifications
 		}),
@@ -127,7 +131,9 @@ const config = {
 		},
 	},
 	resolveLoader: {
-		modules: [path.resolve(__dirname, "loaders"), "node_modules"],
+		// modules: [path.resolve(__dirname, "loaders"), "node_modules"],
+		modules: [LOADERS_PATH, "node_modules"],
+
 		extensions: [".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
 	},
 };
