@@ -81,4 +81,4 @@ function sectionSource(assetParts) {
 	return new ConcatSource(...sources);
 }
 
-module.exports = LiquidPlugin;
+export default LiquidPlugin;

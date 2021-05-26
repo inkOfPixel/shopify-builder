@@ -40,4 +40,4 @@ function getSource(asset) {
 	}, "");
 }
 
-module.exports = AfterEmitPlugin;
+export default AfterEmitPlugin;

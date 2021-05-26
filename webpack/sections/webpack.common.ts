@@ -1,10 +1,11 @@
 // @ts-check
 
-const path = require("path");
-const fs = require("fs");
-const LiquidPlugin = require("./plugins/LiquidPlugin");
-const AfterEmitPlugin = require("./plugins/AfterEmitPlugin");
-const WebpackBuildNotifierPlugin = require("webpack-build-notifier");
+import path from "path";
+import fs from "fs";
+import LiquidPlugin from "./plugins/LiquidPlugin";
+import AfterEmitPlugin from "./plugins/AfterEmitPlugin";
+import WebpackBuildNotifierPlugin from "webpack-build-notifier";
+
 const RUNNER_PROJECT_ROOT = process.cwd();
 const SRC_ROOT = path.resolve(RUNNER_PROJECT_ROOT, "src");
 const RUNNER_NODE_MODULES = path.resolve(RUNNER_PROJECT_ROOT, "node_modules");
@@ -12,6 +13,8 @@ const LOADERS_PATH = path.resolve(
 	process.cwd(),
 	"node_modules/shopify-builder/webpack/sections/loaders"
 );
+
+console.log("LOADERS_PATH", LOADERS_PATH);
 
 function getSections() {
 	if (!fs.existsSync(path.resolve(RUNNER_PROJECT_ROOT, "src/sections"))) {
@@ -138,4 +141,4 @@ const config = {
 	},
 };
 
-module.exports = config;
+export default config;

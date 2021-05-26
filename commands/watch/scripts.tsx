@@ -1,6 +1,6 @@
 import React from "react";
 import CompilationFeedback from "../../helpers/CompilationFeedback";
-import webpackConfig from "../../webpack/scripts/webpack.dev.js";
+import webpackConfig from "../../webpack/scripts/webpack.dev";
 
 function WatchScripts() {
 	return (

@@ -31,7 +31,7 @@ function CompilationFeedback({
 					🎉🎉🎉 {type} compiled: watching for changes 👀
 				</Text>
 			)}
-			{warnings.length > 0 ? (
+			{/* {warnings.length > 0 ? (
 				<Box flexDirection="column">
 					{warnings.map((warning) => (
 						<Text color="yellow">{warning}</Text>
@@ -46,7 +46,7 @@ function CompilationFeedback({
 						</Text>
 					))}
 				</Box>
-			) : null}
+			) : null} */}
 		</Box>
 	);
 }

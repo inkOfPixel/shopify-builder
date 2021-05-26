@@ -1,10 +1,10 @@
 // @ts-check
 
-const path = require("path");
+import path from "path";
 const BundleAnalyzerPlugin =
 	require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const fs = require("fs");
-const WebpackBuildNotifierPlugin = require("webpack-build-notifier");
+import fs from "fs";
+import WebpackBuildNotifierPlugin from "webpack-build-notifier";
 
 const RUNNER_PROJECT_ROOT = process.cwd();
 const SCRIPTS_ROOT = path.resolve(RUNNER_PROJECT_ROOT, "src/scripts");
@@ -19,25 +19,24 @@ function getPackages() {
 		.readdirSync(PACKAGES_ROOT)
 		.filter((name) => name !== ".DS_Store");
 
-	return packages.reduce((entries, package) => {
+	return packages.reduce((entries, packageName) => {
 		let fileEntry;
-		if (fs.existsSync(`${PACKAGES_ROOT}/${package}/index.js`)) {
-			fileEntry = `${PACKAGES_ROOT}/${package}/index.js`;
-		} else if (fs.existsSync(`${PACKAGES_ROOT}/${package}/index.ts`)) {
-			fileEntry = `${PACKAGES_ROOT}/${package}/index.ts`;
-		} else if (fs.existsSync(`${PACKAGES_ROOT}/${package}/index.tsx`)) {
-			fileEntry = `${PACKAGES_ROOT}/${package}/index.tsx`;
+		if (fs.existsSync(`${PACKAGES_ROOT}/${packageName}/index.js`)) {
+			fileEntry = `${PACKAGES_ROOT}/${packageName}/index.js`;
+		} else if (fs.existsSync(`${PACKAGES_ROOT}/${packageName}/index.ts`)) {
+			fileEntry = `${PACKAGES_ROOT}/${packageName}/index.ts`;
+		} else if (fs.existsSync(`${PACKAGES_ROOT}/${packageName}/index.tsx`)) {
+			fileEntry = `${PACKAGES_ROOT}/${packageName}/index.tsx`;
 		}
-		console.log("fileEntry", fileEntry);
 
 		return {
 			...entries,
-			[package]: path.resolve(PACKAGES_ROOT, fileEntry),
+			[packageName]: path.resolve(PACKAGES_ROOT, fileEntry),
 		};
 	}, {});
 }
 
-module.exports = {
+export default {
 	entry: getPackages(),
 	output: {
 		filename: "[name].iop.js",
