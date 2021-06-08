@@ -1,37 +1,18 @@
 // @ts-check
 
 const path = require("path");
-const chalk = require("chalk");
 const ConcatSource = require("webpack-sources").ConcatSource;
+import { Chunk, Compilation, Compiler } from "webpack";
 
 class LiquidPlugin {
+	chunkVersions: Record<string, string>;
+	startTime: number;
 	constructor() {
 		this.startTime = Date.now();
-		this.prevTimestamps = new Map();
-
 		this.chunkVersions = {};
 	}
 
-	getChangedFiles(compilation) {
-		const changedFiles = Object.keys(compilation.fileTimestamps).filter(
-			(watchfile) =>
-				(this.previousTimestamps[watchfile] || this.startTime) <
-				(compilation.fileTimestamps[watchfile] || Infinity)
-		);
-		this.previousTimestamps = compilation.fileTimestamps;
-		return changedFiles;
-	}
-
-	getChangedChunk(compilation) {
-		const changedFiles = this.getChangedFiles(compilation);
-		return Array.from(compilation.chunks).filter((chunk) =>
-			changedFiles.some((file) =>
-				chunk.entryModule.fileDependencies.includes(file)
-			)
-		);
-	}
-
-	emitLiquidAssetsForChunks(compilation, chunks) {
+	emitLiquidAssetsForChunks(compilation: Compilation, chunks: Chunk[]): void {
 		const assetsParts = {};
 		Object.keys(compilation.assets).forEach((filename) => {
 			const { name } = path.parse(filename);
@@ -55,14 +36,14 @@ class LiquidPlugin {
 		}, {});
 	}
 
-	apply(compiler) {
+	apply(compiler: Compiler) {
 		compiler.hooks.emit.tapAsync("LiquidPlugin", (compilation, callback) => {
 			var changedChunks = Array.from(compilation.chunks).filter((chunk) => {
 				var oldVersion = this.chunkVersions[chunk.name];
 				this.chunkVersions[chunk.name] = chunk.hash;
 				return chunk.hash !== oldVersion;
 			});
-
+			console.log("changedChunks", changedChunks);
 			this.emitLiquidAssetsForChunks(compilation, changedChunks);
 
 			callback();
