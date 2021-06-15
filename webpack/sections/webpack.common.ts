@@ -11,7 +11,7 @@ const SRC_ROOT = path.resolve(RUNNER_PROJECT_ROOT, "src");
 const RUNNER_NODE_MODULES = path.resolve(RUNNER_PROJECT_ROOT, "node_modules");
 const LOADERS_PATH = path.resolve(
 	process.cwd(),
-	"node_modules/@inkofpixel/shopify-builder/webpack/sections/loaders"
+	"node_modules/@inkofpixel/shopify-builder/build/loaders"
 );
 
 console.log("LOADERS_PATH", LOADERS_PATH);

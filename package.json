@@ -11,7 +11,8 @@
 	"scripts": {
 		"dev": "pastel dev",
 		"build": "pastel build",
-		"prepare": "pastel build"
+		"prepare": "pastel build",
+		"postbuild": "cp -r webpack/sections/loaders ./build"
 	},
 	"files": [
 		"build"
