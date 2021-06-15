@@ -14,6 +14,8 @@ const LOADERS_PATH = path.resolve(
 	"node_modules/@inkofpixel/shopify-builder/webpack/sections/loaders"
 );
 
+console.log("LOADERS_PATH", LOADERS_PATH);
+
 function getSections() {
 	if (!fs.existsSync(path.resolve(RUNNER_PROJECT_ROOT, "src/sections"))) {
 		return {};
@@ -132,7 +134,6 @@ const config = {
 		},
 	},
 	resolveLoader: {
-		// modules: [path.resolve(__dirname, "loaders"), "node_modules"],
 		modules: [LOADERS_PATH, "node_modules"],
 
 		extensions: [".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
