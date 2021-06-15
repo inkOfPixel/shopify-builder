@@ -32,7 +32,7 @@ The structure of the **src** folder must be
 |   +-- sections
 ```
 
-Where scripts contains JS **scripts** (like React) and sections **contains** liquid. For more information look in the example folder
+Where scripts contains JS **scripts** (like React) and sections **contains** liquid.
 
 ```bash
 yarn add @inkofpixel/shopify-builder -D
