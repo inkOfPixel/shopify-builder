@@ -9,12 +9,14 @@ import WebpackBuildNotifierPlugin from "webpack-build-notifier";
 const RUNNER_PROJECT_ROOT = process.cwd();
 const SRC_ROOT = path.resolve(RUNNER_PROJECT_ROOT, "src");
 const RUNNER_NODE_MODULES = path.resolve(RUNNER_PROJECT_ROOT, "node_modules");
+import liquidLoader from "./loaders/liquid-loader.js";
+
 const LOADERS_PATH = path.resolve(
 	process.cwd(),
 	"node_modules/@inkofpixel/shopify-builder/build/loaders"
 );
 
-console.log("LOADERS_PATH", LOADERS_PATH);
+// console.log("LOADERS_PATH", LOADERS_PATH);
 
 function getSections() {
 	if (!fs.existsSync(path.resolve(RUNNER_PROJECT_ROOT, "src/sections"))) {
@@ -112,7 +114,7 @@ const config = {
 			},
 			{
 				test: /\.liquid$/,
-				use: [{ loader: "liquid-loader" }],
+				use: liquidLoader,
 			},
 		],
 	},
@@ -133,11 +135,11 @@ const config = {
 			lib: path.resolve(SRC_ROOT, "lib"),
 		},
 	},
-	resolveLoader: {
-		modules: [LOADERS_PATH, "node_modules"],
+	// resolveLoader: {
+	// 	modules: [LOADERS_PATH, "node_modules"],
 
-		extensions: [".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
-	},
+	// 	extensions: [".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
+	// },
 };
 
 export default config;
