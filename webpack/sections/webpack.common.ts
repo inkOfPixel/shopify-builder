@@ -14,8 +14,6 @@ const LOADERS_PATH = path.resolve(
 	"node_modules/shopify-builder/webpack/sections/loaders"
 );
 
-console.log("LOADERS_PATH", LOADERS_PATH);
-
 function getSections() {
 	if (!fs.existsSync(path.resolve(RUNNER_PROJECT_ROOT, "src/sections"))) {
 		return {};

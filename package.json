@@ -1,5 +1,5 @@
 {
-	"name": "shopify-builder",
+	"name": "@inkofpixel/shopify-builder",
 	"version": "0.0.2",
 	"license": "MIT",
 	"bin": "./build/cli.js",

@@ -43,9 +43,7 @@ class LiquidPlugin {
 				this.chunkVersions[chunk.name] = chunk.hash;
 				return chunk.hash !== oldVersion;
 			});
-			console.log("changedChunks", changedChunks);
 			this.emitLiquidAssetsForChunks(compilation, changedChunks);
-
 			callback();
 		});
 	}

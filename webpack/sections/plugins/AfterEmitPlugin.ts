@@ -9,14 +9,12 @@ class AfterEmitPlugin {
 		compiler.hooks.emit.tap(
 			"after-emit",
 			function emit(compilation: Compilation) {
-				console.log("AFTER EMIT");
 				setTimeout(() => {
 					const emittedAssets = _.filter(
 						compilation.assets,
 						(asset) => asset.emitted
 					);
 					emittedAssets.forEach((asset) => {
-						console.log("asset.existsAt", asset.existsAt);
 						fs.writeFile(
 							asset.existsAt,
 							getSource(asset),
