@@ -953,6 +953,13 @@
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.5.tgz#b32366c89b43c6f8cefbdefac778b9c828e3ba8c"
   integrity sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==
 
+"@inkofpixel/liquid-loader@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@inkofpixel/liquid-loader/-/liquid-loader-0.0.1.tgz#6683c0ab681fee9cd6a000e14d36e507f5517a91"
+  integrity sha512-xFq8+dY9I86M609+h+2/1UBWOW4oJlpSirvQMJdppTBu8WW+ol7/jJaaC/jnG8+F7TarBgfwBQXMxdtB/I+HUQ==
+  dependencies:
+    chalk "4.1.1"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
