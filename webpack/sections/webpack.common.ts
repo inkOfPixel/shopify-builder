@@ -8,7 +8,13 @@ import WebpackBuildNotifierPlugin from "webpack-build-notifier";
 
 const RUNNER_PROJECT_ROOT = process.cwd();
 const SRC_ROOT = path.resolve(RUNNER_PROJECT_ROOT, "src");
+console.log("SRC_ROOT", SRC_ROOT);
+
 const RUNNER_NODE_MODULES = path.resolve(RUNNER_PROJECT_ROOT, "node_modules");
+console.log(
+	'path.resolve(__dirname, "loaders")',
+	path.resolve(__dirname, "loaders")
+);
 
 function getSections() {
 	if (!fs.existsSync(path.resolve(RUNNER_PROJECT_ROOT, "src/sections"))) {
@@ -106,7 +112,7 @@ const config = {
 			},
 			{
 				test: /\.liquid$/,
-				use: [{ loader: "liquid-loader" }],
+				use: "liquid-loader",
 			},
 		],
 	},
@@ -128,7 +134,8 @@ const config = {
 		},
 	},
 	resolveLoader: {
-		modules: ["node_modules", "node_modules/@inkofpixel/liquid-loader"],
+		modules: ["node_modules", "node_modules/@inkofpixel"],
+		extensions: [".js"],
 	},
 };
 
