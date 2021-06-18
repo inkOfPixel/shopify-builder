@@ -11,10 +11,6 @@ const SRC_ROOT = path.resolve(RUNNER_PROJECT_ROOT, "src");
 console.log("SRC_ROOT", SRC_ROOT);
 
 const RUNNER_NODE_MODULES = path.resolve(RUNNER_PROJECT_ROOT, "node_modules");
-console.log(
-	'path.resolve(__dirname, "loaders")',
-	path.resolve(__dirname, "loaders")
-);
 
 function getSections() {
 	if (!fs.existsSync(path.resolve(RUNNER_PROJECT_ROOT, "src/sections"))) {
@@ -74,8 +70,8 @@ const config = {
 			},
 			{
 				test: /\.s?css$/,
+				type: "asset/source",
 				use: [
-					"raw-loader",
 					"extract-loader",
 					{
 						loader: "css-loader",
@@ -107,8 +103,7 @@ const config = {
 			},
 			{
 				test: /\.json$/,
-				exclude: [RUNNER_NODE_MODULES, /node_modules/],
-				use: ["raw-loader", { loader: "extract-loader" }],
+				type: "asset/source",
 			},
 			{
 				test: /\.liquid$/,
