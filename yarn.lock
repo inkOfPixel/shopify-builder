@@ -1768,10 +1768,10 @@
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.5.tgz#b32366c89b43c6f8cefbdefac778b9c828e3ba8c"
   integrity sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==
 
-"@inkofpixel/liquid-loader@0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@inkofpixel/liquid-loader/-/liquid-loader-0.0.3.tgz#08ed5feaeefa0a754d9c0759251d6d13601426d4"
-  integrity sha512-JOo1DJFPE8cVEvIVIy3QEbl8DS5+bqn7WkG4tc2785G40JlmeKfsk/7a2Yo3TmPi4CvoWNz0qxrfrD6S9RBo0g==
+"@inkofpixel/liquid-loader@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@inkofpixel/liquid-loader/-/liquid-loader-0.0.5.tgz#02897e5546abc94162bca32aa97c4007695525bb"
+  integrity sha512-aEsV8wo4ElnXf0h0xkzzGyG2aPMb+0kxoeRx6ojkpQoV8P38wtATsVM7JxSgVUIR34GEzK2LTXXVfRSv6BfzFA==
   dependencies:
     babel-jest "27.0.2"
     chalk "4.1.1"
