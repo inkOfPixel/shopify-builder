@@ -44,22 +44,22 @@ Add this to the scripts of your package.json
 "dev": "shopify-builder watch",
 "watch-scripts": "shopify-builder watch scripts",
 "watch-sections": "shopify-builder watch sections",
+"build": "shopify-builder build",
 "build-scripts": "shopify-builder build scripts",
 "build-sections": "shopify-builder build sections"
 ```
 
-add
+add this to .gitignore
 
 ```.gitignore
- *.iop.*
+# Ignore iop files
+*.iop.*
 ```
 
-to .gitignore
+add to theme if there is something in "scripts" folder
 
-add to theme
-
-```js
-<script src="{{ '[package-name].iop.js' | asset_url }}" ></script>
-<script src="{{ 'runtime.iop.js' | asset_url }}" ></script>
-<script src="{{ 'vendor.iop.js' | asset_url }}" ></script>
+```html
+<script src="{{ '[package-name].iop.js' | asset_url }}"></script>
+<script src="{{ 'runtime.iop.js' | asset_url }}"></script>
+<script src="{{ 'vendor.iop.js' | asset_url }}"></script>
 ```
